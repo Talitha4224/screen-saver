@@ -1,15 +1,15 @@
+const FRAME_DELAY = 10;
+const POINT_SIZE = 10; 
 const MAX_X = 500;
 const MAX_Y = 500;
-const FRAME_DELAY = 10;
-const POINT_SIZE = 100;
 
-//Find a random number
-const getRandomNumber = (min, max) => {
+getRandomNumber = (min, max) => {
     return Math.random() * (max - min) + min;
 }
 
+
 const begin = () => {
-    const canvas = document.getElementById('screensaver');
+    const canvas = document.getElementById('screenSaver');
     const context = canvas.getContext('2d');
 
     canvas.width = MAX_X;
@@ -18,10 +18,9 @@ const begin = () => {
     frame(canvas, context)();
 }
 
-//Black canvas
 const frame = (canvas, context) => () => {
     //Clear
-    context.fillStyle = "#000000";  
+    context.fillStyle = "#000000"
     context.fillRect(0, 0, MAX_X, MAX_Y);
 
     //Paint
@@ -31,48 +30,41 @@ const frame = (canvas, context) => () => {
     setTimeout(() => requestAnimationFrame(frame(canvas, context)), FRAME_DELAY);
 }
 
-const createSquare = (x, y) => {
+//Create points
+const NUM_POINTS = 100;
+const points = Array(NUM_POINTS).fill({}).map(point => {
     return {
-        color: "#FF00FF", 
-
+        color: 'rgb(' + getRandomNumber(0, 255)+ ',' + getRandomNumber(0, 255) + ',' + getRandomNumber + ')',              //rgb(10,20,30)
+        
         x: {
-            location: x,
-            speed: 1,
-            direction: 1
+            loc: getRandomNumber(0, MAX_X),
+            speed: getRandomNumber(0.1, 0.5), 
+            dir: getRandomNumber (0, 2) < 1 ? -1 : 1,
         },
         y: {
-            location: y,
-            speed: 1,
-            direction: 1 
+            loc: getRandomNumber(0, MAX_Y),
+            speed: getRandomNumber (0.1, 0.5), 
+            dir: getRandomNumber (0, 2) < 1 ? -1 : 1,
         }
     }
-}
-
-const numberOfSquares = 1;
-const squares = Array(numberOfSquares).fill({}).map(square => {   //Squares is the varible, square is the function argument
-    return createSquare(7, 7);
 });
 
-//Paint squares
 const paintFrame = (canvas, context) => {
-    // Draw all the squares 
-    squares.forEach(square => {
+    points.forEach(point => {
+    //Paint points
+    context.fillStyle = point.color
+    context.fillRect(point.x.loc, point.y.loc, POINT_SIZE, POINT_SIZE);  
 
-        //Paint square
-        context.strokeStyle = "#0000FF";         //fillRect needs fillStyle, strokeRect needs strokeStyle
-        context.lineWidth = 2;
-        context.strokeRect(square.x.location, square.y.location, POINT_SIZE, POINT_SIZE );
-    });
+    //Move point
+    point.x.loc = point.x.loc + point.x.speed * point.x.dir;
+    point.y.loc = point.y.loc + point.y.speed * point.y.dir;
 
-    // Add a new square to the right
-    squares.push(createSquare(squares[squares.length-1].x.location + 15, squares[squares.length-1].y.location));
-
-    
-};
-
-squares.forEach(square => {
-    if(square.x.location  >= 450) {
-        context.strokeStyle = "#FF0000"
-        square.y.direction *= -1   
+    //Bounce
+    if(point.x.loc >= MAX_X || point.x.loc <= 0) {
+        point.x.dir *= -1;
     }
-});
+    if(point.y.loc >= MAX_Y || point.y.loc <= 0) {
+        point.y.dir *= -1;
+    } 
+    });
+}
