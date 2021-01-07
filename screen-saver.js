@@ -3,7 +3,7 @@ const MAX_Y = 500;
 const FRAME_DELAY = 10;
 const POINT_SIZE = 30;
 
-getRandomNumber = (min, max) => {
+const getRandomNumber = (min, max) => {
     return Math.random() * (max - min) + min;
 }
 
