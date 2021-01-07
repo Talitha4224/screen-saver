@@ -9,7 +9,7 @@ const getRandomNumber = (min, max) => {
 }
 
 const begin = () => {
-    const canvas = document.getElementById('second screensaver');
+    const canvas = document.getElementById('screensaver');
     const context = canvas.getContext('2d');
 
     canvas.width = MAX_X;
