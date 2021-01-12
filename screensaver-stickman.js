@@ -4,7 +4,7 @@ FRAME_DELAY = 200;
 POINT_SIZE = 30;
 
 const begin = () => {
-    const canvas = document.getElementById("screensaver-stickman");
+    const canvas = document.getElementById("screen-saver-stickman");
     const context = canvas.getContext('2d');
 
     canvas.width = MAX_X;
