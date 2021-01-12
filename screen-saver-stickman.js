@@ -37,7 +37,6 @@ const SCALE = 8;
 const X_OFFSET = 10;
 const Y_OFFSET = 300;
 const frameData = [
-const frameData = [
    //    H    N    N    LE   LH   RE   RH    H    RK    RF   LK    LF
   { x: [4,   4,   4,    3,   3,    4,   6,   4,    3,    2,   5,  5.5],
     y: [2,   4,   6,    8,  10,    8,  10,  10,   13,   15,  13,   15]},
