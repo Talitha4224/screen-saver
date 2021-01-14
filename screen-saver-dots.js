@@ -34,7 +34,7 @@ const frame = (canvas, context) => () => {
 const NUM_POINTS = 100;
 const points = Array(NUM_POINTS).fill({}).map(point => {
     return {
-        color: 'rgb(' + getRandomNumber(0, 255) + ',' + getRandomNumber(0, 255) + ',' + getRandomNumber(0, 255) ')',              //rgb(10,20,30)
+        color: 'rgb(' + getRandomNumber(0, 255) + ',' + getRandomNumber(0, 255) + ',' + getRandomNumber(0, 255) + ')',              //rgb(10,20,30)
         
         x: {
             loc: getRandomNumber(0, MAX_X),
